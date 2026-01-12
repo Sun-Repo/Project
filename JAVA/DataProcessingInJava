@@ -1,0 +1,77 @@
+String result = "";
+for (int i = 0; i < n; i++) {
+    result += "Data" + i;
+}
+// Each + operation creates a new String object in memory.
+
+// Strings are immutable in Java → concatenation creates a lot of unnecessary objects.
+
+// Time complexity increases drastically with large n.
+// Optimized
+// StringBuilder is mutable, so appending does not create new objects each time.
+
+// Reduces memory allocation and GC overhead.
+
+// Runs significantly faster for large datasets.
+StringBuilder sb = new StringBuilder();
+for (int i = 0; i < n; i++) {
+    sb.append("Data").append(i);
+}
+// =====================================================
+// Iteration Optimization Scenarios
+int[] arr = new int[1_000_000];
+int sum = 0;
+for (int i = 0; i < arr.length; i++) {
+    sum = sum + arr[i];
+}
+// Optimized
+// Enhanced for loop avoids repeated arr.length access in each iteration.
+
+// Cleaner, less error-prone.
+int sum = 0;
+for (int value : arr) { // Enhanced for loop
+    sum += value;
+}
+// ================================================================
+// Filtering test results, logs, or API responses.
+List<String> list = new ArrayList<>();
+List<String> result = new ArrayList<>();
+for (String s : list) {
+    if (s.startsWith("Test")) result.add(s);
+}
+// Optimized
+List<String> result = list.stream()
+                          .filter(s -> s.startsWith("Test"))
+                          .toList();
+// ==========================================================
+// Iterating with Index Caching
+for (int i = 0; i < list.size(); i++) {
+    System.out.println(list.get(i));
+}
+// Optimized
+for (int i = 0, len = list.size(); i < len; i++) {
+    System.out.println(list.get(i));
+}
+// =======================================================================
+// Removing Items While Iterating
+for (String s : list) {
+    if (s.isEmpty()) list.remove(s);
+}
+// Optimized
+// Uses Iterator.remove() safely.
+// Avoids full copy/reallocation.
+// Prevents runtime exceptions.
+Iterator<String> iter = list.iterator();
+while (iter.hasNext()) {
+    if (iter.next().isEmpty()) iter.remove();
+}
+// =========================================================
+// Iterating with Parallelism
+List<Integer> nums = List.of(1,2,3,4,...);
+int total = 0;
+for (int n : nums) total += n;
+// Optimized
+// Automatically splits work across CPU cores.
+// Significant speedup for large datasets
+int total = nums.parallelStream().mapToInt(Integer::intValue).sum();
+// =============================================================================
