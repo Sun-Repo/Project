@@ -1,0 +1,116 @@
+//explains the process in xml
+<suite parallel="test" thread-count="3">
+<!-- -----------------------------------------=========== -->
+<!-- use TestNG groups to control execution scope. For example, smoke tests run on every commit, while full regression runs nightly. This balances speed and coverage -->
+<groups>
+  <run>
+    <include name="smoke"/>
+  </run>
+</groups>
+<!-- ==================suite config============ -->
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="RegressionSuite" parallel="tests" thread-count="3">
+    <test name="LoginTests">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="GroupingExampleTest"/>
+            <class name="ParallelExecutionTest"/>
+        </classes>
+    </test>
+</suite>
+<!-- ================================================================================= -->
+<!-- se TestNG dependencies so that dependent tests are skipped if the prerequisite fails. This avoids false failures and makes reports more meaningful.” -->
+<!-- dependsOnMethods -->
+@Test
+public void login() {}
+
+@Test(dependsOnMethods = "login")
+public void dashboardValidation() {}
+
+<!-- ========================================================= -->
+<!-- sing TestNG’s RetryAnalyzer. This ensures transient failures don’t break CI pipelines while still flagging genuine defects.” -->
+In UI and API automation, some failures are transient — network issues, timing delays, environment instability. Retry logic helps stabilize CI pipelines without masking real defects
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
+
+public class RetryAnalyzer implements IRetryAnalyzer {
+
+    private int retryCount = 0;
+    private static final int maxRetryCount = 2; // retry twice
+
+    @Override
+    public boolean retry(ITestResult result) {
+        if (retryCount < maxRetryCount) {
+            retryCount++;
+            return true; // re-run test
+        }
+        return false; // stop retrying
+    }
+}
+==========Attaching RetryAnalyzer to a Test==============
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class SampleRetryTest {
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void flakyTest() {
+        Assert.assertTrue(Math.random() > 0.7);
+    }
+}
+================IAnnotationTransformer (Best Practice)==============
+import org.testng.IAnnotationTransformer;
+import org.testng.annotations.ITestAnnotation;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+
+public class RetryTransformer implements IAnnotationTransformer {
+
+    @Override
+    public void transform(
+            ITestAnnotation annotation,
+            Class testClass,
+            Constructor testConstructor,
+            Method testMethod) {
+
+        if (annotation.getRetryAnalyzer() == null) {
+            annotation.setRetryAnalyzer(RetryAnalyzer.class);
+        }
+    }
+}
+===========================Register Listener================================
+<listeners>
+    <listener class-name="RetryTransformer"/>
+</listeners>
+Implemented TestNG RetryAnalyzer with IAnnotationTransformer to automatically rerun flaky tests, improving CI pipeline stability by 30%.
+
+Can RetryAnalyzer hide real defects?
+Yes, excessive retries can mask real defects. That’s why retries should be limited and used only for transient issues like network or environment instability—not assertion or business logic failures
+What happens if a test passes on retry?
+“TestNG marks it as passed, but good frameworks still track that it failed initially. In mature setups, we log retries or mark them as ‘passed with retries’ in reports.
+Can RetryAnalyzer work with parallel execution?
+“Yes, but retry logic must be thread-safe. Retry counters should be instance-level, not static, otherwise retries may interfere across threads.”
+static String token;========Threads overwrite shared variables
+Why not use static WebDriver in parallel execution?
+“Static WebDriver creates a shared instance across threads, leading to race conditions and unpredictable browser behavior. ThreadLocal ensures one driver per thread.”
+Difference between parallel = methods vs classes?
+Parallel methods run multiple methods of the same class concurrently, which increases the risk of shared state issues. Parallel classes provide better isolation
+Can listeners impact test performance?
+“Yes. Heavy logic in listeners—like I/O operations or screenshots—can slow execution, especially in parallel runs. Listener logic must be lightweight and thread-safe.
+When should RetryAnalyzer NOT be used?
+“RetryAnalyzer should not be used for deterministic failures like assertion mismatches, data issues, or business rule violations.”
+How do you retry only specific failures?
+“Inside RetryAnalyzer, we inspect the exception type or error message and retry only for transient exceptions like timeouts or connection issues.”
+Does ThreadLocal eliminate all concurrency issues?
+“No. ThreadLocal isolates per-thread objects, but shared resources like databases, files, or static caches can still cause concurrency issues
+What happens if you forget ThreadLocal.remove()?
+It can cause memory leaks, especially in long-running processes like CI agents, because thread-local references remain attached to threads.
+Is parallel execution always faster?
+“No. Parallel execution can overload environments, browsers, or databases. Performance depends on resource availability and test isolation.
+How do you debug flaky tests?
+Retries reduce noise but don’t fix flakiness. I debug root causes using logs, screenshots, timing analysis, and environment stability checks.”
