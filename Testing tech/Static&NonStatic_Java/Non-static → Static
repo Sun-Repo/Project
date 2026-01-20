@@ -1,0 +1,42 @@
+======================================
+Static data shared across all objects
+Non-static method can access static members
+=======================================
+
+
+class Demo {
+
+    static int count = 0;
+
+    void increment() {
+        count++;
+    }
+
+    public static void main(String[] args) {
+        Demo d1 = new Demo();
+        d1.increment();
+        System.out.println(count);
+    }
+}
+// =============Example=============================
+
+class Employee {
+
+    static int totalEmployees = 0;
+
+    Employee() {
+        totalEmployees++;
+    }
+
+    void displayTotal() {
+        System.out.println("Total Employees: " + totalEmployees);
+    }
+
+    public static void main(String[] args) {
+        new Employee();
+        new Employee();
+
+        Employee e = new Employee();
+        e.displayTotal();
+    }
+}

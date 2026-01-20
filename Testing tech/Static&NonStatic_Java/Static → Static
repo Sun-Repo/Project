@@ -1,0 +1,27 @@
+
+// ====================================
+// No object needed
+// ====================================
+class MathUtil {
+
+    static int square(int x) {
+        return x * x;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(MathUtil.square(5));
+    }
+}
+
+
+// ==========Example 1==========
+class CurrencyUtil {
+
+    static double convertUsdToInr(double usd) {
+        return usd * 83;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(CurrencyUtil.convertUsdToInr(10));
+    }
+}

@@ -1,0 +1,34 @@
+// =================================================
+// must create an object
+// ================================================
+
+class Calculator {
+
+    int a = 10;
+
+    void add() {
+        System.out.println(a + 5);
+    }
+
+    public static void main(String[] args) {
+        Calculator calc = new Calculator(); // object required
+        calc.add();
+    }
+}
+
+
+// ==========Eaxample 1==========
+class BankAccount {
+
+    double balance;
+
+    void deposit(double amount) {
+        balance += amount;
+        System.out.println("Balance: " + balance);
+    }
+
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount();
+        acc.deposit(1000);
+    }
+}

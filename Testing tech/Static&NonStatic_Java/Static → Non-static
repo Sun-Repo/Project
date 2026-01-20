@@ -1,0 +1,46 @@
+=======================================
+Static methods run without object
+Non-static variables need object
+=======================================
+
+class Test {
+
+    int x = 10;
+
+    static void show() {
+        System.out.println(x); // ❌ ERROR
+    }
+}
+
+
+// =============Correct==================================
+
+class Test {
+
+    int x = 10;
+
+    static void show() {
+        Test obj = new Test();
+        System.out.println(obj.x);
+    }
+
+    public static void main(String[] args) {
+        show();
+    }
+}
+
+// ================Example 1=============================
+
+class AppConfig {
+
+    String appName = "MyApp";
+
+    static void printAppName() {
+        AppConfig config = new AppConfig();
+        System.out.println(config.appName);
+    }
+
+    public static void main(String[] args) {
+        printAppName();
+    }
+}
