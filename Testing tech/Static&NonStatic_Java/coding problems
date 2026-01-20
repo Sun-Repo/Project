@@ -1,0 +1,173 @@
+===================================================
+Problem 1: Predict the Output
+===================================================
+
+
+class Interview1 {
+
+    static int x = 10;
+
+    static {
+        x = x + 5;
+        System.out.println("Static block: " + x);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Main: " + x);
+    }
+}
+
+// Output:
+Static block: 15
+Main: 15
+
+===================================================
+Problem 2: Predict the Output
+===================================================
+class Interview2 {
+
+    static {
+        System.out.println("Static block executed");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Main method");
+    }
+}
+// Output:
+Static block executed
+Main method
+===================================================
+Problem 3: Predict the Output
+===================================================
+class Interview3 {
+
+    static int a;
+
+    static {
+        a = 5;
+        System.out.println("Block 1: " + a);
+    }
+
+    static {
+        a = a + 10;
+        System.out.println("Block 2: " + a);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Main: " + a);
+    }
+}
+// Output:
+Block 1: 5
+Block 2: 15
+Main: 15
+===================================================
+Problem 4: Predict the Output
+===================================================
+class Interview4 {
+
+    static {
+        System.out.println("Static block");
+    }
+
+    Interview4() {
+        System.out.println("Constructor");
+    }
+
+    public static void main(String[] args) {
+        new Interview4();
+        new Interview4();
+    }
+}
+// Output:
+Static block
+Constructor
+Constructor
+===================================================
+Problem 5: Predict the Output
+===================================================
+class Interview5 {
+
+    static int count = 0;
+
+    Interview5() {
+        count++;
+    }
+
+    public static void main(String[] args) {
+        new Interview5();
+        new Interview5();
+        new Interview5();
+
+        System.out.println(count);
+    }
+}
+// Output:
+3   
+===================================================
+Problem 6: Predict the Output
+===================================================
+class Interview6 {
+
+    static int x;
+
+    static {
+        x = test()+6;
+    }
+
+    static int test() {
+        return 20;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(x);
+    }
+}
+// Output:
+26
+===================================================
+Problem 7: Predict the Output
+===================================================
+class Interview7 {
+
+    static int x;
+
+    static {
+        try {
+            x = 10 / 0;
+        } catch (Exception e) {
+            x = 100;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(x);
+    }
+}
+// Output:
+100 
+=================================================== 
+Problem 8: Predict the Output
+===================================================
+class TestSetup {
+
+    static String browser;
+
+    static {
+        browser = "Chrome";
+        System.out.println("Browser initialized");
+    }
+
+    static void runTest() {
+        System.out.println("Running on " + browser);
+    }
+
+    public static void main(String[] args) {
+        runTest();
+    }
+}
+// Output:
+Browser initialized
+Running on Chrome
+===================================================
