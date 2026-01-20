@@ -1,0 +1,99 @@
+================================
+Class loaded
+Static block executed
+main() executed
+================================
+
+
+class StaticDemo {
+
+    static int x;
+
+    // Static block
+    static {
+        x = 10;
+        System.out.println("Static block executed");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Main method executed");
+        System.out.println("x = " + x);
+    }
+}
+
+
+// ===========================Multiple Static Blocks===========================
+
+
+class MultiStaticBlock {
+
+    static int a;
+
+    // First static block
+    static {
+        System.out.println("First static block");
+        a = 10;
+    }
+
+    // Second static block
+    static {
+        System.out.println("Second static block");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("a = " + a);
+    }
+}
+
+Explanation of Output:
+
+When the class is loaded, the static blocks are executed in the order they appear in the code. Therefore, for the first code snippet, when the `StaticDemo` class is loaded, the static block initializes `x` to 10 and prints "Static block executed". After that, when the `main` method is called, it prints "Main method executed" followed by the value of `x`.    
+Class loaded
+Static block executed
+Main method executed
+x = 10
+OUTPUT:
+First static block
+Second static block
+a = 10
+
+
+// ============================example============================  
+class DatabaseConfig {
+
+    static String DB_URL;
+    static String USERNAME;
+    static String PASSWORD;
+
+    static {
+        DB_URL = "jdbc:mysql://localhost:3306/testdb";
+        USERNAME = "admin";
+        PASSWORD = "password";
+        System.out.println("Database configuration loaded");
+    }
+
+    public static void main(String[] args) {
+        System.out.println(DB_URL);
+    }
+}
+
+// =======================Static Variable Update from Static Block==========================
+class Counter {
+
+    static int count;
+
+    static {
+        count = 100;
+    }
+
+    static void increment() {
+        count++;
+    }
+
+    public static void main(String[] args) {
+        increment();
+        System.out.println(count);
+    }
+}
+
+output:101

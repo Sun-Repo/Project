@@ -1,0 +1,44 @@
+class Test {
+
+    static {
+        System.out.println("Static block");
+    }
+
+    Test() {
+        System.out.println("Constructor");
+    }
+
+    public static void main(String[] args) {
+        new Test();
+        new Test();
+    }
+}
+
+// Output:
+Static block
+Constructor
+Constructor
+// Explanation:
+When the `Test` class is loaded, the static block is executed first, printing "Static block". Then, each time a new object of the `Test` class is created using `new Test()`, the constructor is called, printing "Constructor" for each instance created.
+// =================Example 1======================
+
+class TestEnvironment {
+
+    static String browser;
+
+    static {
+        browser = "Chrome";
+        System.out.println("Browser setup done");
+    }
+
+    static void runTest() {
+        System.out.println("Running test on " + browser);
+    }
+
+    public static void main(String[] args) {
+        runTest();
+    }
+}
+// Output:
+Browser setup done  
+Running test on Chrome
