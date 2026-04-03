@@ -1,0 +1,295 @@
+ 1. WebDriver Polymorphism (Basic but Critical)
+ Question
+
+Write code to launch different browsers using polymorphism.
+
+ Expected Approach
+WebDriver driver;
+
+String browser = "chrome";
+
+if(browser.equalsIgnoreCase("chrome")) {
+    driver = new ChromeDriver();
+} else if(browser.equalsIgnoreCase("firefox")) {
+    driver = new FirefoxDriver();
+}
+
+driver.get("https://example.com");
+What interviewer checks
+Use of upcasting
+Flexibility to switch drivers
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 2. Factory Design Pattern (Advanced Polymorphism)
+ Question
+
+Design a Driver Factory using polymorphism.
+
+Answer
+interface DriverFactory {
+    WebDriver createDriver();
+}
+
+class ChromeFactory implements DriverFactory {
+    public WebDriver createDriver() {
+        return new ChromeDriver();
+    }
+}
+
+class FirefoxFactory implements DriverFactory {
+    public WebDriver createDriver() {
+        return new FirefoxDriver();
+    }
+}
+
+Usage:
+
+DriverFactory factory = new ChromeFactory();
+WebDriver driver = factory.createDriver();
+ Expectation
+Interface-based design
+Loose coupling
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 3. Method Overriding in Page Object Model
+ Question
+
+Override a method for different platforms (Web vs Mobile)
+
+Answer
+class BasePage {
+    void click() {
+        System.out.println("Default click");
+    }
+}
+
+class WebPage extends BasePage {
+    @Override
+    void click() {
+        System.out.println("Web click using Selenium");
+    }
+}
+
+class MobilePage extends BasePage {
+    @Override
+    void click() {
+        System.out.println("Mobile tap using Appium");
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 4. Dynamic Element Handling (Overloading)
+ Question
+
+Create overloaded click methods.
+
+ Answer
+void click(By locator) {
+    driver.findElement(locator).click();
+}
+
+void click(WebElement element) {
+    element.click();
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 5. Runtime Polymorphism in Test Execution
+ Question
+
+Predict output:
+
+class BaseTest {
+    void setup() {
+        System.out.println("Base Setup");
+    }
+}
+
+class ChromeTest extends BaseTest {
+    void setup() {
+        System.out.println("Chrome Setup");
+    }
+}
+
+BaseTest test = new ChromeTest();
+test.setup();
+ Answer
+
+Output: Chrome Setup
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 6. Tricky Overloading + Overriding Combo
+Question
+class A {
+    void click(Object o) {
+        System.out.println("Object click");
+    }
+}
+
+class B extends A {
+    void click(String s) {
+        System.out.println("String click");
+    }
+}
+
+A obj = new B();
+obj.click("test");
+Answer
+
+Output: Object click
+
+ Tests compile-time vs runtime understanding
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 7. Base Test Framework Design
+ Question
+
+Design a base test class and override setup for different environments.
+
+ Answer
+class BaseTest {
+    void setup() {
+        System.out.println("Common setup");
+    }
+}
+
+class ProdTest extends BaseTest {
+    @Override
+    void setup() {
+        System.out.println("Prod setup");
+    }
+}
+
+class QaTest extends BaseTest {
+    @Override
+    void setup() {
+        System.out.println("QA setup");
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Question
+
+Design an abstract base page.
+
+✅ Answer
+abstract class BasePage {
+    abstract void openPage();
+
+    void commonMethod() {
+        System.out.println("Common functionality");
+    }
+}
+
+class LoginPage extends BasePage {
+    void openPage() {
+        System.out.println("Opening login page");
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 9. Interface-Based Framework (Best Practice)
+ Question
+
+Design a reusable click action using interface.
+
+ Answer
+interface Clickable {
+    void click();
+}
+
+class Button implements Clickable {
+    public void click() {
+        System.out.println("Button clicked");
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+10. Real Framework Scenario (Retry Logic)
+Question
+
+Override method to add retry logic.
+
+ Answer
+class BaseAction {
+    void click() {
+        System.out.println("Click once");
+    }
+}
+
+class RetryAction extends BaseAction {
+    @Override
+    void click() {
+        for(int i=0; i<3; i++) {
+            try {
+                System.out.println("Trying click " + i);
+                break;
+            } catch(Exception e) {}
+        }
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 11. Polymorphism with Lists
+ Question
+List<WebDriver> drivers = List.of(new ChromeDriver(), new FirefoxDriver());
+
+for(WebDriver d : drivers) {
+    d.get("https://example.com");
+}
+ Concept
+Same method get() behaves differently internally
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 12. Downcasting Use Case
+ Question
+WebDriver driver = new ChromeDriver();
+
+ChromeDriver cd = (ChromeDriver) driver;
+Answer
+
+Valid but risky if object type changes
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 13. Shadowing vs Overriding
+ Question
+class A {
+    static void test() { System.out.println("A"); }
+}
+
+class B extends A {
+    static void test() { System.out.println("B"); }
+}
+
+A obj = new B();
+obj.test();
+Answer
+
+Output: A
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+14. Fluent Interface (Advanced Design)
+ Question
+
+Design method chaining using polymorphism.
+
+Answer
+class LoginPage {
+    LoginPage enterUsername() {
+        return this;
+    }
+
+    LoginPage enterPassword() {
+        return this;
+    }
+
+    HomePage clickLogin() {
+        return new HomePage();
+    }
+}
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 15. Real Selenium Problem (Best One)
+ Question
+
+Design a framework where same test runs on:
+
+Chrome
+Firefox
+Mobile
+Expected Answer
+Use interface or base class
+Override driver setup
+Use polymorphism:
+BaseTest test = new MobileTest(); // or WebTest
+test.setup();
+
+Pro Tip 
+
+“In Selenium frameworks, polymorphism is heavily used in driver initialization, page classes, and reusable actions. It allows us to write platform-independent tests while keeping implementation flexible.”
+
