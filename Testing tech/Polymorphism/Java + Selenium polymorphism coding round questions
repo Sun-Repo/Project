@@ -1,9 +1,7 @@
  1. WebDriver Polymorphism (Basic but Critical)
  Question
-
 Write code to launch different browsers using polymorphism.
 
- Expected Approach
 WebDriver driver;
 
 String browser = "chrome";
@@ -18,6 +16,7 @@ driver.get("https://example.com");
 What interviewer checks
 Use of upcasting
 Flexibility to switch drivers
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
  2. Factory Design Pattern (Advanced Polymorphism)
  Question
@@ -48,7 +47,9 @@ WebDriver driver = factory.createDriver();
  Expectation
 Interface-based design
 Loose coupling
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
  3. Method Overriding in Page Object Model
  Question
 
@@ -74,7 +75,9 @@ class MobilePage extends BasePage {
         System.out.println("Mobile tap using Appium");
     }
 }
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
  4. Dynamic Element Handling (Overloading)
  Question
 
@@ -111,6 +114,7 @@ test.setup();
  Answer
 
 Output: Chrome Setup
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
  6. Tricky Overloading + Overriding Combo
 Question
@@ -228,6 +232,7 @@ for(WebDriver d : drivers) {
 }
  Concept
 Same method get() behaves differently internally
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
  12. Downcasting Use Case
  Question
@@ -237,6 +242,7 @@ ChromeDriver cd = (ChromeDriver) driver;
 Answer
 
 Valid but risky if object type changes
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
  13. Shadowing vs Overriding
  Question
