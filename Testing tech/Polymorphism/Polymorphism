@@ -1,4 +1,5 @@
 Overloading is compile-time polymorphism, while overriding is runtime polymorphism.”
+
 🔹 1. Method Overloading (Compile-Time Polymorphism)
  Definition
 
@@ -19,6 +20,7 @@ class Login {
 How it works
 Resolved at compile time
 No inheritance required
+
  Real-World QA Scenario
 
 In an automation framework:
@@ -31,6 +33,7 @@ You’re using same action (login) but with different inputs
 Interview One-Liner
 
 “Overloading improves readability and flexibility by allowing multiple ways to perform the same action.”
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 🔹 2. Method Overriding (Runtime Polymorphism)
  Definition
@@ -64,19 +67,18 @@ Interview One-Liner
 
 “Overriding enables customization of inherited behavior, which is essential in scalable test frameworks.”
 
-Key Differences (Say this confidently)
-Feature	Overloading	Overriding
-Polymorphism Type	Compile-time	Runtime
-Inheritance	Not required	Required
-Method Signature	Must differ	Must be same
-Decision Time	Compile time	Runtime
-Use Case	Flexibility	Customization
-Real Automation Framework Comparison
-Overloading Example
-click(By locator);
-click(WebElement element);
+Key Differences
+Feature      	                  Overloading	                     Overriding
+Polymorphism Type	                Compile-time	                   Runtime
+Inheritance	                        Not required	                   Required
+Method Signature	                 Must differ	                  Must be same
+Decision Time	                     Compile time	                   Runtime
+Use Case	                          Flexibility	                 Customization
+Real Automation                      Framework                         Comparison
 
-Same action, different inputs
+ Example                             click(By locator);
+                                   click(WebElement element);
+                                    Same action, different inputs
 
 Overriding Example
 class BasePage {
@@ -94,9 +96,7 @@ class LoginPage extends BasePage {
 
 Child modifies behavior
 
-Advanced Insight (10+ Years Experience)
-
-You can impress interviewers with this:
+TIPS
 
 “In modern automation frameworks, I use overloading for reusable utility methods like login, click, or API calls, while overriding is used in base classes to customize behavior across platforms like web, mobile, or API layers. Overriding also plays a key role in implementing design patterns like Template Method in test frameworks.”
 
@@ -104,302 +104,3 @@ Quick Memory Trick
 Overloading = Same name, Different inputs
 Overriding = Same method, Different behavior
 
-..............................................................................................
-                                     Tricky interview questions
-1. Can you overload a method by changing only the return type?
-No, overloading requires a different method signature, which includes the number or type of parameters.
-2. Can you override a static method?
-No, static methods belong to the class, not the instance, so they cannot be overridden.
-3. What happens if you try to override a method without using the @Override annotation?
-The code will still compile and run, but you may not get the intended behavior if you accidentally
-change the method signature. The @Override annotation helps catch such mistakes at compile time.
-4. Can you overload a method with varargs?
-Yes, you can overload a method with varargs, but the varargs method must have a different parameter list than the other overloaded methods.
-5. Can you override a method and change its access modifier?
-Yes, you can override a method and change its access modifier, but the new access level cannot
-
-Method Overloading vs Autoboxing vs Varargs
-void test(int a) { System.out.println("int"); }
-void test(Integer a) { System.out.println("Integer"); }
-void test(int... a) { System.out.println("varargs"); }
-
-test(10);
-reasons:
-Priority:
-
-Exact match (int)
-Autoboxing (Integer)
-Varargs (int...)
-
-2. Overloading with NULL
-Question
-void test(String s) { System.out.println("String"); }
-void test(Object o) { System.out.println("Object"); }
-
-test(null);
- Answer
-
-Output: String
-
- Why?
-String is more specific than Object
- 3. Ambiguous NULL Case
- Question
-void test(String s) {}
-void test(Integer i) {}
-
-test(null);
-Answer
-
- Compilation Error (Ambiguous)
-
-Why?
-Both are unrelated types → compiler confused
- 4. Overriding vs Overloading Confusion
- Question
-class A {
-    void test(Object o) {
-        System.out.println("A");
-    }
-}
-
-class B extends A {
-    void test(String s) {
-        System.out.println("B");
-    }
-}
-
-A obj = new B();
-obj.test("hello");
- Answer
-Output: A
-
-Why?
-Method resolution happens at compile time based on reference type
-This is overloading, not overriding
- 5. True Overriding Example
-Question
-class A {
-    void test() {
-        System.out.println("A");
-    }
-}
-
-class B extends A {
-    @Override
-    void test() {
-        System.out.println("B");
-    }
-}
-
-A obj = new B();
-obj.test();
-✅ Answer
-
-Output: B
- Why?
-Runtime polymorphism → method overridden
-6. Static Method Polymorphism Trap
- Question
-class A {
-    static void test() {
-        System.out.println("A");
-    }
-}
-
-class B extends A {
-    static void test() {
-        System.out.println("B");
-    }
-}
-
-A obj = new B();
-obj.test();
- Answer
-Output: A
- Why?
-Static methods are not overridden, they are hidden
-Resolved at compile time
- 7. Private Method Trick
- Question
-class A {
-    private void test() {
-        System.out.println("A");
-    }
-}
-
-class B extends A {
-    void test() {
-        System.out.println("B");
-    }
-}
-
-A obj = new B();
-obj.test();
- Answer
- Compilation Error
-
-Why?
-test() in A is not visible, so no overriding
-Reference type A cannot access B’s method
- 8. Final Method Trick
- Question
-class A {
-    final void test() {}
-}
-
-class B extends A {
-    void test() {}
-}
- Answer
- Compilation Error
-
- Why?
-final methods cannot be overridden
- 9. Covariant Return Type
- Question
-class A {
-    Object get() {
-        return "A";
-    }
-}
-
-class B extends A {
-    String get() {
-        return "B";
-    }
-}
-Answer
- Valid
-Why?
-Java allows covariant return types (child return type allowed)
-10. Constructor Polymorphism Myth
- Question Can constructors be overridden?
-
- Answer
- No
-
-Why?
-Constructors are not inherited
-Only constructor chaining (super()) exists
- 11. Runtime vs Compile-Time Confusion
- Question
-class A {
-    void test(int a) {
-        System.out.println("int");
-    }
-}
-
-class B extends A {
-    void test(Integer a) {
-        System.out.println("Integer");
-    }
-}
-
-A obj = new B();
-obj.test(10);
-Answer
-
-Output: int
-
- Why?
-Method chosen at compile time → test(int)
-No overriding here
- 12. Interface Default Method Conflict
- Question
-interface A {
-    default void test() { System.out.println("A"); }
-}
-
-interface B {
-    default void test() { System.out.println("B"); }
-}
-
-class C implements A, B {
-    public void test() {
-        A.super.test();
-    }
-}
- Answer
-
-Output: A
-
- Why?
-Must override to resolve ambiguity
-🔥13. Upcasting Behavior
- Question Why do we use:
-
-WebDriver driver = new ChromeDriver();
-Answer
-Enables runtime polymorphism
-Allows switching drivers:
-driver = new FirefoxDriver();
-
- Framework flexibility
-
- 14. Downcasting Risk
- Question
-A obj = new A();
-B b = (B) obj;
-Answer
-
-ClassCastException
-
-15. Overloading Return Type Trick
- Question int test() { return 1; }
-double test() { return 2.0; }
-Answer
-
-Compilation Error
-
-💡 Why?
-Return type alone cannot differentiate methods
-16. Real QA Scenario (Wait Handling)
- Question Why override a click method in framework?
-
-Answer
-
-To add custom behavior like waits, logging, retries:
-
-@Override
-void click() {
-    waitForElement();
-    super.click();
-}
-17. Dynamic Dispatch Edge Case
- Question Variables vs methods in polymorphism?
-
-Answer
-Variables → No polymorphism
-Methods → Yes polymorphism
-18. Abstract Class Trick
- Question Can abstract methods be overridden?
-
- Answer
-
-Must be overridden in child class
-
-19. Method Signature Rule
- Question What defines overriding?
-
-Answer
-Same name
-Same parameters
-Compatible return type
-
-20. Real Senior-Level Question
- Question Where do you use polymorphism in automation frameworks?
-
-Answer (Strong Answer)
-
-“I use runtime polymorphism in driver initialization, page classes, and test base classes. It helps in cross-browser execution, platform-specific behavior (web vs mobile), and designing scalable frameworks using abstraction and interfaces.”
-
-Final Tip for Interview
-
-If asked tricky polymorphism:
-Always check:
-
-Reference type
-Object type
-Compile vs runtime
-Method signature
