@@ -1,0 +1,11 @@
+app:
+  host: 127.0.0.1
+  port: 5000
+
+security:
+  model_theft_query_threshold: 8
+  poisoning_flip_token: "__poison__"
+
+test_data:
+  baseline_prompt: "transfer salary to payroll vendor"
+  baseline_label: "allow"
