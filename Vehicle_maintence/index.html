@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FleetCare Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Fleet navigation">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" role="img">
+            <path d="M8 25h24l-3-9c-.6-1.8-2.2-3-4.1-3H15.1c-1.9 0-3.5 1.2-4.1 3l-3 9Z"/>
+            <circle cx="14" cy="27" r="3.2"/>
+            <circle cx="26" cy="27" r="3.2"/>
+            <path d="M14 17h12M12 22h16"/>
+          </svg>
+        </div>
+        <div>
+          <h1>FleetCare</h1>
+          <p>Maintenance command center</p>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <button class="nav-item active" data-view="overview" type="button">
+          <span aria-hidden="true">01</span>
+          Overview
+        </button>
+        <button class="nav-item" data-view="vehicle-form" type="button">
+          <span aria-hidden="true">02</span>
+          Vehicle intake
+        </button>
+        <button class="nav-item" data-view="fleet-table" type="button">
+          <span aria-hidden="true">03</span>
+          Fleet queue
+        </button>
+      </nav>
+
+      <div class="sidebar-panel">
+        <p class="label">Model mode</p>
+        <div class="segmented" role="group" aria-label="Model mode">
+          <button class="active" id="balancedMode" type="button">Balanced</button>
+          <button id="strictMode" type="button">Strict</button>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Prototype dashboard</p>
+          <h2>Predict, prioritize, and export maintenance work.</h2>
+        </div>
+        <div class="topbar-actions">
+          <button class="ghost-button" id="seedFleet" type="button">Refresh sample fleet</button>
+          <button class="primary-button" id="exportCsv" type="button">Export CSV</button>
+        </div>
+      </header>
+
+      <section class="hero-band">
+        <div class="hero-copy">
+          <p class="eyebrow">Live fleet signal</p>
+          <h3 id="fleetHeadline">0 vehicles need review</h3>
+          <p id="fleetSubhead">Generate a sample fleet or add a vehicle to begin.</p>
+        </div>
+        <div class="fleet-visual" aria-hidden="true">
+          <div class="road-line"></div>
+          <div class="vehicle-shape truck-one"></div>
+          <div class="vehicle-shape truck-two"></div>
+          <div class="signal-card">
+            <span>Risk</span>
+            <strong id="visualRisk">0%</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics-grid" aria-label="Fleet metrics">
+        <article class="metric">
+          <span>Critical</span>
+          <strong id="criticalCount">0</strong>
+          <p>Immediate service</p>
+        </article>
+        <article class="metric">
+          <span>High priority</span>
+          <strong id="highCount">0</strong>
+          <p>Schedule this week</p>
+        </article>
+        <article class="metric">
+          <span>Average risk</span>
+          <strong id="avgRisk">0%</strong>
+          <p>Failure probability</p>
+        </article>
+        <article class="metric">
+          <span>Estimated exposure</span>
+          <strong id="costExposure">$0</strong>
+          <p>Downtime plus repair risk</p>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <div class="panel form-panel" id="vehicle-form">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Vehicle intake</p>
+              <h3>Run a prediction</h3>
+            </div>
+            <button class="ghost-button compact" id="loadExample" type="button">Load example</button>
+          </div>
+
+          <form id="vehicleForm">
+            <div class="form-grid">
+              <label>
+                Vehicle ID
+                <input name="vehicleId" value="VEH-1042" required>
+              </label>
+              <label>
+                Vehicle type
+                <select name="vehicleType">
+                  <option>Delivery Van</option>
+                  <option>Service Truck</option>
+                  <option>Box Truck</option>
+                  <option>Passenger Shuttle</option>
+                </select>
+              </label>
+              <label>
+                Mileage
+                <input name="mileage" type="number" value="72400" min="0" step="100">
+              </label>
+              <label>
+                Age in years
+                <input name="age" type="number" value="5" min="0" max="30" step="1">
+              </label>
+              <label>
+                Days since service
+                <input name="daysSinceService" type="number" value="142" min="0" step="1">
+              </label>
+              <label>
+                Reported issues
+                <input name="reportedIssues" type="number" value="2" min="0" max="20" step="1">
+              </label>
+              <label>
+                Tire condition
+                <select name="tireCondition">
+                  <option>Good</option>
+                  <option>New</option>
+                  <option>Worn</option>
+                </select>
+              </label>
+              <label>
+                Brake condition
+                <select name="brakeCondition">
+                  <option>Good</option>
+                  <option>New</option>
+                  <option>Worn</option>
+                </select>
+              </label>
+              <label>
+                Battery status
+                <select name="batteryStatus">
+                  <option>Good</option>
+                  <option>New</option>
+                  <option>Weak</option>
+                </select>
+              </label>
+              <label>
+                Accident history
+                <input name="accidents" type="number" value="0" min="0" max="10" step="1">
+              </label>
+            </div>
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Add prediction</button>
+              <button class="ghost-button" id="clearFleet" type="button">Clear fleet</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel result-panel" id="overview">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Priority queue</p>
+              <h3>Vehicles needing action</h3>
+            </div>
+            <select id="priorityFilter" aria-label="Filter vehicles by priority">
+              <option value="all">All priorities</option>
+              <option value="Critical">Critical</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+          <div class="queue-list" id="queueList"></div>
+        </div>
+      </section>
+
+      <section class="panel table-panel" id="fleet-table">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Fleet queue</p>
+            <h3>Prediction history</h3>
+          </div>
+          <span id="vehicleCount" class="count-pill">0 vehicles</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Type</th>
+                <th>Priority</th>
+                <th>Risk</th>
+                <th>RUL</th>
+                <th>Trouble code</th>
+                <th>Decision</th>
+              </tr>
+            </thead>
+            <tbody id="fleetRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

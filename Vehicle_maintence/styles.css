@@ -1,0 +1,546 @@
+:root {
+  --ink: #18212a;
+  --muted: #66707d;
+  --line: #dbe2ea;
+  --panel: #ffffff;
+  --canvas: #f4f7fa;
+  --nav: #102033;
+  --nav-soft: #1b314a;
+  --green: #2f9e74;
+  --amber: #c77b22;
+  --red: #c94444;
+  --blue: #3467c8;
+  --teal: #1596a3;
+  --shadow: 0 14px 34px rgba(22, 34, 48, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--canvas);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--nav);
+  color: #f7fbff;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.brand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: #e8f7f3;
+  color: var(--green);
+  display: grid;
+  place-items: center;
+}
+
+.brand-mark svg {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
+}
+
+.brand h1,
+.brand p,
+.topbar h2,
+.hero-copy h3,
+.panel h3,
+.metric p {
+  margin: 0;
+}
+
+.brand h1 {
+  font-size: 1.25rem;
+}
+
+.brand p,
+.sidebar-panel,
+.nav-item span {
+  color: #b6c6d8;
+}
+
+.nav-list {
+  display: grid;
+  gap: 8px;
+}
+
+.nav-item {
+  border: 1px solid transparent;
+  color: #f7fbff;
+  background: transparent;
+  text-align: left;
+  padding: 13px 14px;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-item.active,
+.nav-item:hover {
+  background: var(--nav-soft);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-panel {
+  margin-top: auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.label,
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.segmented button {
+  border: 0;
+  color: #d8e5f3;
+  background: transparent;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.segmented button.active {
+  color: var(--ink);
+  background: #ffffff;
+}
+
+main {
+  padding: 28px;
+  display: grid;
+  gap: 22px;
+}
+
+.topbar,
+.panel-header,
+.form-actions,
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.topbar h2 {
+  font-size: clamp(1.45rem, 2vw, 2.1rem);
+  line-height: 1.18;
+}
+
+.primary-button,
+.ghost-button {
+  min-height: 42px;
+  border-radius: 8px;
+  padding: 0 15px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.primary-button {
+  color: #ffffff;
+  border-color: #224d9b;
+  background: var(--blue);
+}
+
+.compact {
+  min-height: 36px;
+}
+
+.hero-band {
+  min-height: 210px;
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(16, 32, 51, 0.96), rgba(16, 32, 51, 0.7)),
+    repeating-linear-gradient(135deg, #293f57 0 12px, #334c68 12px 24px);
+  color: #ffffff;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 42%);
+  overflow: hidden;
+}
+
+.hero-copy {
+  padding: 30px;
+  align-self: center;
+}
+
+.hero-copy .eyebrow {
+  color: #a9d8d8;
+}
+
+.hero-copy h3 {
+  font-size: clamp(1.8rem, 3vw, 3.1rem);
+  line-height: 1.05;
+  margin-bottom: 12px;
+}
+
+.hero-copy p:last-child {
+  max-width: 650px;
+  color: #d8e5f3;
+}
+
+.fleet-visual {
+  position: relative;
+  min-height: 210px;
+  background: linear-gradient(135deg, rgba(21, 150, 163, 0.18), rgba(47, 158, 116, 0.2));
+}
+
+.road-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 58px;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #ffffff 0 40px, transparent 40px 74px);
+  opacity: 0.7;
+}
+
+.vehicle-shape {
+  position: absolute;
+  width: 118px;
+  height: 48px;
+  border-radius: 8px 8px 5px 5px;
+  background: #f4f7fa;
+  bottom: 66px;
+  box-shadow: 0 18px 24px rgba(0, 0, 0, 0.18);
+}
+
+.vehicle-shape::before,
+.vehicle-shape::after {
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #162330;
+  border: 4px solid #8ba2b8;
+}
+
+.vehicle-shape::before {
+  left: 18px;
+}
+
+.vehicle-shape::after {
+  right: 16px;
+}
+
+.truck-one {
+  right: 58px;
+}
+
+.truck-two {
+  width: 92px;
+  height: 38px;
+  right: 205px;
+  bottom: 98px;
+  opacity: 0.78;
+}
+
+.signal-card {
+  position: absolute;
+  right: 30px;
+  top: 28px;
+  min-width: 112px;
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.signal-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.signal-card strong {
+  font-size: 1.8rem;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.metric,
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.metric {
+  padding: 18px;
+}
+
+.metric span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.metric strong {
+  display: block;
+  margin: 8px 0 4px;
+  font-size: 2rem;
+}
+
+.metric p {
+  color: var(--muted);
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(350px, 0.92fr) minmax(420px, 1.08fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.panel {
+  padding: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: #3a4652;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 10px;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.form-actions {
+  justify-content: flex-start;
+  margin-top: 18px;
+}
+
+.queue-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.vehicle-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.vehicle-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.vehicle-card h4,
+.vehicle-card p {
+  margin: 0;
+}
+
+.vehicle-card p {
+  color: var(--muted);
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  align-self: start;
+}
+
+.badge.Critical {
+  color: #ffffff;
+  background: var(--red);
+}
+
+.badge.High {
+  color: #ffffff;
+  background: var(--amber);
+}
+
+.badge.Medium {
+  color: #ffffff;
+  background: var(--teal);
+}
+
+.badge.Low {
+  color: #ffffff;
+  background: var(--green);
+}
+
+.vehicle-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.vehicle-stats div {
+  border-radius: 8px;
+  background: #f6f8fb;
+  padding: 9px;
+}
+
+.vehicle-stats span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.vehicle-stats strong {
+  display: block;
+  margin-top: 3px;
+}
+
+.table-panel {
+  margin-bottom: 24px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 14px;
+}
+
+table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+th {
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.count-pill {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--muted);
+}
+
+.empty-state {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  color: var(--muted);
+  background: #f8fafc;
+}
+
+@media (max-width: 1050px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+  .metrics-grid,
+  .workspace,
+  .hero-band {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  main,
+  .sidebar {
+    padding: 18px;
+  }
+
+  .topbar,
+  .panel-header,
+  .topbar-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .form-grid,
+  .metrics-grid,
+  .vehicle-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .fleet-visual {
+    min-height: 150px;
+  }
+}
