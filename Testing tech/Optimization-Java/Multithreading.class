@@ -1,0 +1,119 @@
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+public class Multithreading {
+   public Multithreading() {
+   }
+
+   static void inefficientThreads(int var0) throws InterruptedException {
+      for(int var1 = 0; var1 < var0; ++var1) {
+         (new Thread(() -> sleep(50L))).start();
+      }
+
+      Thread.sleep(500L);
+   }
+
+   static void optimizedThreadPool(int var0, int var1) throws InterruptedException {
+      ExecutorService var2 = Executors.newFixedThreadPool(var1);
+
+      for(int var3 = 0; var3 < var0; ++var3) {
+         var2.submit(() -> sleep(50L));
+      }
+
+      shutdownAndAwait(var2);
+   }
+
+   static List<String> filterPassingResults(List<String> var0) {
+      return (List)var0.stream().filter((var0x) -> var0x.startsWith("PASS")).collect(Collectors.toList());
+   }
+
+   static List<Integer> findCommonValues(List<Integer> var0, List<Integer> var1) {
+      HashSet var2 = new HashSet(var1);
+      ArrayList var3 = new ArrayList();
+
+      for(Integer var5 : var0) {
+         if (var2.contains(var5)) {
+            var3.add(var5);
+         }
+      }
+
+      return var3;
+   }
+
+   static String buildResultString(int var0) {
+      StringBuilder var1 = new StringBuilder(var0 * 8);
+
+      for(int var2 = 0; var2 < var0; ++var2) {
+         var1.append("test").append(var2);
+      }
+
+      return var1.toString();
+   }
+
+   static void removeEmptyValues(List<String> var0) {
+      Iterator var1 = var0.iterator();
+
+      while(var1.hasNext()) {
+         if (((String)var1.next()).isEmpty()) {
+            var1.remove();
+         }
+      }
+
+   }
+
+   static void processInBatches(List<String> var0, int var1, int var2) throws InterruptedException {
+      ExecutorService var3 = Executors.newFixedThreadPool(var2);
+
+      for(int var4 = 0; var4 < var0.size(); var4 += var1) {
+         int var6 = Math.min(var4 + var1, var0.size());
+         var3.submit(() -> var0.subList(var4, var6).forEach(Multithreading::process));
+      }
+
+      shutdownAndAwait(var3);
+   }
+
+   static void process(String var0) {
+      if (var0 != null) {
+         ;
+      }
+   }
+
+   static void shutdownAndAwait(ExecutorService var0) throws InterruptedException {
+      var0.shutdown();
+      if (!var0.awaitTermination(10L, TimeUnit.SECONDS)) {
+         var0.shutdownNow();
+      }
+
+   }
+
+   static void sleep(long var0) {
+      try {
+         Thread.sleep(var0);
+      } catch (InterruptedException var3) {
+         Thread.currentThread().interrupt();
+      }
+
+   }
+
+   public static void main(String[] var0) throws InterruptedException {
+      byte var1 = 100;
+      long var2 = System.nanoTime();
+      optimizedThreadPool(var1, 10);
+      System.out.println("Optimized thread pool time: " + (System.nanoTime() - var2));
+      ArrayList var4 = new ArrayList(List.of("PASS-login", "FAIL-search", "", "PASS-checkout"));
+      System.out.println("Filtered results: " + filterPassingResults(var4));
+      removeEmptyValues(var4);
+      System.out.println("Cleaned results: " + var4);
+      List var5 = findCommonValues(List.of(1, 2, 3, 4), List.of(3, 4, 5, 6));
+      System.out.println("Common values: " + var5);
+      System.out.println("String length: " + buildResultString(1000).length());
+      processInBatches(var4, 2, 2);
+   }
+}
