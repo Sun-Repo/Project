@@ -11,7 +11,7 @@ public final class TestConfig {
     }
 
     public static String deviceUdid() {
-        return prop("deviceUdid", "R5CR82MHA1T");
+        return prop("deviceUdid", "emulator-5554");
     }
 
     public static String platformVersion() {
@@ -32,6 +32,15 @@ public final class TestConfig {
 
     public static String outputDir() {
         return prop("outputDir", "output");
+    }
+
+    public static String allureArtifactsDir() {
+        return prop("allureArtifactsDir", outputDir() + "/allure-report/artifacts");
+    }
+
+    public static String allureRunTimestamp() {
+        return prop("allureRunTimestamp", java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")
+                .format(java.time.LocalDateTime.now()));
     }
 
     private static String prop(String key, String fallback) {

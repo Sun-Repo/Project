@@ -9,7 +9,8 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {
                 "pretty",
                 "html:../output/CucumberSauceDemoBddReport.html",
-                "json:../output/CucumberSauceDemoBddReport.json"
+                "json:../output/CucumberSauceDemoBddReport.json",
+                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
         },
         monochrome = true
 )

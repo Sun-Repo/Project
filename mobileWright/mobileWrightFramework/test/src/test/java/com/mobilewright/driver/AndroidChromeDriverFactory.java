@@ -26,7 +26,6 @@ public final class AndroidChromeDriverFactory {
 
         options.setCapability("appium:autoGrantPermissions", true);
         options.setCapability("appium:chromedriverAutodownload", true);
-        options.setCapability("appium:disableWindowAnimation", true);
         options.setCapability("appium:nativeWebScreenshot", true);
         options.setCapability("appium:ensureWebviewsHavePages", true);
 

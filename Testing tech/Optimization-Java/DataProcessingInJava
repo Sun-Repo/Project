@@ -45,7 +45,7 @@ List<String> result = list.stream()
                           .toList();
 // ==========================================================
 // Iterating with Index Caching
-for (int i = 0; i < list.size(); i++) {
+for (int i =z 0; i < list.size(); i++) {
     System.out.println(list.get(i));
 }
 // Optimized
