@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MobileWright MCP SauceDemo Android Chrome Suite" verbose="1">
+    <test name="SauceDemo BDD login/logout users">
+        <classes>
+            <class name="com.mobilewright.bdd.RunCucumberTest"/>
+        </classes>
+    </test>
+</suite>

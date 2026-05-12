@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-05-11T19:52:58 EDT" name="MobileWright MCP SauceDemo Android Chrome Suite" finished-at="2026-05-11T20:03:24 EDT" duration-ms="626174">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.mobilewright.bdd.RunCucumberTest@72035809]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2026-05-11T19:52:58 EDT" name="SauceDemo BDD login/logout users" finished-at="2026-05-11T20:03:24 EDT" duration-ms="626174">
+      <class name="com.mobilewright.bdd.RunCucumberTest">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.mobilewright.bdd.RunCucumberTest@72035809]" started-at="2026-05-11T19:52:58 EDT" name="setUpClass" finished-at="2026-05-11T19:52:58 EDT" duration-ms="562" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@6dacde96]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.mobilewright.bdd.RunCucumberTest@72035809]" started-at="2026-05-11T19:52:58 EDT" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-05-11T19:54:50 EDT" duration-ms="111933" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Successful users can login and logout"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["SauceDemo mobile login on Android Chrome"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.mobilewright.bdd.RunCucumberTest@72035809]" started-at="2026-05-11T19:54:50 EDT" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-05-11T19:56:37 EDT" duration-ms="106778" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Successful users can login and logout"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["SauceDemo mobile login on Android Chrome"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.mobilewright.bdd.RunCucumberTest@72035809]" started-at="2026-05-11T19:56:37 EDT" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-05-11T19:58:31 EDT" duration-ms="113997" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Successful users can login and logout"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["SauceDemo mobile login on Android Chrome"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.mobilewright.bdd.RunCucumberTest@72035809]" started-at="2026-05-11T19:58:31 EDT" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-05-11T20:00:21 EDT" duration-ms="110057" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Successful users can login and logout"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["SauceDemo mobile login on Android Chrome"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.mobilewright.bdd.RunCucumberTest@72035809]" started-at="2026-05-11T20:00:21 EDT" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-05-11T20:02:12 EDT" duration-ms="110870" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Successful users can login and logout"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["SauceDemo mobile login on Android Chrome"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.mobilewright.bdd.RunCucumberTest@72035809]" started-at="2026-05-11T20:02:12 EDT" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-05-11T20:03:24 EDT" duration-ms="71544" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Locked out user sees the expected validation message"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["SauceDemo mobile login on Android Chrome"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.mobilewright.bdd.RunCucumberTest@72035809]" started-at="2026-05-11T20:03:24 EDT" name="tearDownClass" finished-at="2026-05-11T20:03:24 EDT" duration-ms="355" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- com.mobilewright.bdd.RunCucumberTest -->
+    </test> <!-- SauceDemo BDD login/logout users -->
+  </suite> <!-- MobileWright MCP SauceDemo Android Chrome Suite -->
+</testng-results>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Report - MobileWright Travel</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Booking Report</h2>
+    <p><strong>User:</strong> {{ user }}</p>
+    <p><strong>Date of Travel:</strong> {{ booking.date }}</p>
+    <p><strong>SUV Type:</strong> {{ booking.suv_type }}</p>
+    <h3>Payment Details</h3>
+    <p><strong>Card Number:</strong> **** **** **** {{ payment.card_number[-4:] }}</p>
+    <p><strong>Expiry:</strong> {{ payment.expiry }}</p>
+    <a href="/logout">Logout</a>
+</body>
+</html>

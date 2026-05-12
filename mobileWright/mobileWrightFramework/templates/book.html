@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book SUV - MobileWright Travel</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Book an SUV</h2>
+    <form method="post">
+        <label>Date of Travel: <input type="date" name="date" required></label><br>
+        <label>SUV Type:
+            <select name="suv_type" required>
+                <option value="Standard">Standard</option>
+                <option value="Luxury">Luxury</option>
+                <option value="XL">XL</option>
+            </select>
+        </label><br>
+        <button type="submit">Continue to Payment</button>
+    </form>
+    <a href="/logout">Logout</a>
+</body>
+</html>
