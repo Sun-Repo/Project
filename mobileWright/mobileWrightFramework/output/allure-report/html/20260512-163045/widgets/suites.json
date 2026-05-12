@@ -1,1 +1,0 @@
-{"total":2,"items":[{"uid":"184f1f21b1b0bf412beb9284482bc569","name":"SauceDemo mobile checkout on Android Chrome","statistic":{"failed":0,"broken":3,"skipped":0,"passed":6,"unknown":0,"total":9}},{"uid":"1b1cd996361c7f71c955baa44ffc6d68","name":"SauceDemo mobile login on Android Chrome","statistic":{"failed":0,"broken":0,"skipped":0,"passed":6,"unknown":0,"total":6}}]}
