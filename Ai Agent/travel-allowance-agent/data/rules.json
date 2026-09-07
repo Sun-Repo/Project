@@ -1,0 +1,62 @@
+{
+  "required_fields": [
+    "employee_id",
+    "employee_name",
+    "age",
+    "sex",
+    "employment_class",
+    "distance_to_work",
+    "travel_frequency",
+    "annual_household_income",
+    "monthly_gross_income",
+    "mortgage_payment",
+    "property_tax",
+    "home_insurance",
+    "car_loan_payment"
+  ],
+  "semantic_keywords": [
+    "employee",
+    "travel",
+    "allowance",
+    "final",
+    "age",
+    "distance",
+    "household",
+    "income",
+    "housing",
+    "support",
+    "transportation",
+    "approved"
+  ],
+  "age_brackets": {
+    "18-25": 40,
+    "26-40": 50,
+    "41-60": 60,
+    "61+": 65
+  },
+  "distance_allowance_map": [
+    {"min": 0, "max": 10, "value": 0},
+    {"min": 10, "max": 30, "value": 10},
+    {"min": 30, "max": null, "value": 20}
+  ],
+  "travel_frequency_factors": {
+    "Daily": 1.0,
+    "3 days/week": 0.75,
+    "Weekly": 0.5
+  },
+  "financial_support_tiers": [
+    {"max_income": 50000, "value": 20},
+    {"max_income": 100000, "value": 10},
+    {"max_income": null, "value": 0}
+  ],
+  "housing_support_rules": [
+    {"threshold": 0.4, "value": 25},
+    {"threshold": 0.3, "value": 15},
+    {"threshold": 0.0, "value": 0}
+  ],
+  "vehicle_support_rules": [
+    {"threshold": 0.15, "value": 20},
+    {"threshold": 0.10, "value": 10},
+    {"threshold": 0.0, "value": 0}
+  ]
+}

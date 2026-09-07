@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Application</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        font-family: Arial, sans-serif;
+        background: #f3f6fb;
+        color: #1f2937;
+        margin: 0;
+        padding: 32px;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: white;
+        padding: 28px 32px;
+        border-radius: 14px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      }
+      h1 { margin-top: 0; }
+      h2 {
+        margin: 28px 0 14px;
+        color: #0f172a;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 8px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+      }
+      label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      input, select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        background: white;
+      }
+      input[type="checkbox"] {
+        width: auto;
+        margin-top: 8px;
+      }
+      .checkbox-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      button {
+        margin-top: 24px;
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      .result {
+        margin-top: 24px;
+        padding: 18px;
+        background: #eef6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: 12px;
+        line-height: 1.6;
+      }
+      .document-box {
+        border: 1px solid #dbeafe;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        border-radius: 12px;
+        padding: 0;
+        overflow: hidden;
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.12);
+      }
+      .document-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%);
+        color: white;
+        padding: 20px 24px;
+      }
+      .brand-mark {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .document-meta {
+        text-align: right;
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+      .document-body {
+        padding: 22px 24px 18px;
+        white-space: pre-wrap;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+      .document-body h3 {
+        margin: 18px 0 8px;
+        font-size: 1.02rem;
+        color: #1e3a8a;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .document-body .section {
+        margin-bottom: 18px;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 12px;
+      }
+      .document-body .summary {
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0 0 8px;
+      }
+      .signature-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+        gap: 18px;
+        margin-top: 24px;
+        padding-top: 18px;
+        border-top: 1px solid #dbeafe;
+      }
+      .signature-box {
+        border-top: 2px solid #0f172a;
+        padding-top: 10px;
+        font-size: 0.86rem;
+        color: #475569;
+      }
+      .print-button {
+        display: inline-block;
+        margin-top: 18px;
+        background: #0f172a;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 16px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .status-row {
+        margin-top: 16px;
+        padding-top: 12px;
+        border-top: 1px solid #dbeafe;
+        font-size: 0.95rem;
+      }
+      .error {
+        color: #b91c1c;
+        margin-top: 12px;
+      }
+      @media print {
+        body {
+          background: white;
+          padding: 0;
+        }
+        .container {
+          max-width: 100%;
+          box-shadow: none;
+          border: none;
+          padding: 0;
+        }
+        form {
+          display: none;
+        }
+        .result {
+          border: none;
+          background: white;
+          padding: 0;
+          margin-top: 0;
+        }
+        .document-box {
+          box-shadow: none;
+          border: 1px solid #dbeafe;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Travel Application Form</h1>
+      <form id="travel-form">
+        <h2>1. Primary Traveler & Passenger Information</h2>
+        <div class="grid">
+          <div class="field"><label>Full Legal Name</label><input name="primary_traveler.full_legal_name" value="John Smith" /></div>
+          <div class="field"><label>First Name</label><input name="primary_traveler.first_name" value="John" /></div>
+          <div class="field"><label>Middle Name</label><input name="primary_traveler.middle_name" value="" /></div>
+          <div class="field"><label>Last Name</label><input name="primary_traveler.last_name" value="Smith" /></div>
+          <div class="field"><label>Date of Birth</label><input name="primary_traveler.date_of_birth" type="date" value="1983-06-15" /></div>
+          <div class="field"><label>Gender</label><select name="primary_traveler.gender"><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>
+          <div class="field"><label>Primary Phone</label><input name="primary_traveler.primary_phone" value="(919) 555-1010" /></div>
+          <div class="field"><label>Email</label><input name="primary_traveler.email" type="email" value="john.smith@example.com" /></div>
+          <div class="field"><label>Home Address</label><input name="primary_traveler.home_address" value="Raleigh, NC" /></div>
+          <div class="field"><label>Emergency Contact Name</label><input name="primary_traveler.emergency_contact.name" value="Mary Smith" /></div>
+          <div class="field"><label>Emergency Contact Relationship</label><input name="primary_traveler.emergency_contact.relationship" value="Spouse" /></div>
+          <div class="field"><label>Emergency Contact Phone</label><input name="primary_traveler.emergency_contact.phone" value="(919) 555-2020" /></div>
+          <div class="field"><label>Emergency Contact Email</label><input name="primary_traveler.emergency_contact.email" type="email" value="mary.smith@example.com" /></div>
+          <div class="field"><label>Passport Number</label><input name="primary_traveler.passport.number" value="P12345678" /></div>
+          <div class="field"><label>Issuing Country</label><input name="primary_traveler.passport.issuing_country" value="United States" /></div>
+          <div class="field"><label>Nationality</label><input name="primary_traveler.passport.nationality" value="American" /></div>
+          <div class="field"><label>Passport Issue Date</label><input name="primary_traveler.passport.issue_date" type="date" value="2018-05-10" /></div>
+          <div class="field"><label>Passport Expiration Date</label><input name="primary_traveler.passport.expiration_date" type="date" value="2028-05-10" /></div>
+          <div class="field"><label>Frequent Flyer Number</label><input name="primary_traveler.loyalty_programs.frequent_flyer" value="AA123456" /></div>
+          <div class="field"><label>Hotel Rewards ID</label><input name="primary_traveler.loyalty_programs.hotel_rewards" value="HH987654" /></div>
+          <div class="field"><label>Rental Car Program</label><input name="primary_traveler.loyalty_programs.rental_car_program" value="EZ-456" /></div>
+        </div>
+
+        <h2>2. Flight Requirements</h2>
+        <div class="grid">
+          <div class="field"><label>Trip Type</label><select name="flight_requirements.trip_type"><option>Round-trip</option><option>One-way</option><option>Multi-city</option></select></div>
+          <div class="field"><label>Departure City</label><input name="flight_requirements.routing.departure_city" value="Raleigh" /></div>
+          <div class="field"><label>Departure Airport Code</label><input name="flight_requirements.routing.departure_airport_code" value="RDU" /></div>
+          <div class="field"><label>Arrival City</label><input name="flight_requirements.routing.arrival_city" value="Singapore" /></div>
+          <div class="field"><label>Arrival Airport Code</label><input name="flight_requirements.routing.arrival_airport_code" value="SIN" /></div>
+          <div class="field"><label>Departure Date</label><input name="flight_requirements.travel_dates.departure_date" type="date" value="2026-10-12" /></div>
+          <div class="field"><label>Return Date</label><input name="flight_requirements.travel_dates.return_date" type="date" value="2026-10-18" /></div>
+          <div class="field"><label>Flexible Date Tolerance</label><input name="flight_requirements.travel_dates.flexible_date_tolerance" value="2 days" /></div>
+          <div class="field"><label>Cabin Class</label><select name="flight_requirements.cabin_class"><option>Economy</option><option>Premium Economy</option><option>Business</option><option>First Class</option></select></div>
+          <div class="field"><label>Seat Preference</label><select name="flight_requirements.seat_preference"><option>Window</option><option>Aisle</option><option>No preference</option></select></div>
+          <div class="field"><label>Meal Preference</label><select name="flight_requirements.meal_preference"><option>Standard</option><option>Vegetarian</option><option>Halal</option><option>Kosher</option></select></div>
+          <div class="field"><label>Checked Bags</label><input name="flight_requirements.baggage.checked_bags" type="number" value="2" /></div>
+          <div class="field"><label>Carry-on Count</label><input name="flight_requirements.baggage.carry_on_count" type="number" value="1" /></div>
+          <div class="field" style="grid-column: 1 / -1;"><label>Special Baggage / Items</label><input name="flight_requirements.baggage.special_items" value="Laptop case and camera" /></div>
+        </div>
+
+        <h2>3. Accommodation (Hotel) Requirements</h2>
+        <div class="grid">
+          <div class="field"><label>Check-in Date</label><input name="hotel_requirements.check_in_date" type="date" value="2026-10-12" /></div>
+          <div class="field"><label>Check-out Date</label><input name="hotel_requirements.check_out_date" type="date" value="2026-10-18" /></div>
+          <div class="field"><label>Location Preference</label><input name="hotel_requirements.location_preference" value="Downtown Singapore" /></div>
+          <div class="field"><label>Hotel Name / Chain</label><input name="hotel_requirements.hotel_name_or_chain" value="Marriott" /></div>
+          <div class="field"><label>Number of Guests</label><input name="hotel_requirements.room_details.number_of_guests" type="number" value="2" /></div>
+          <div class="field"><label>Room Count</label><input name="hotel_requirements.room_details.room_count" type="number" value="1" /></div>
+          <div class="field"><label>Bed Configuration</label><select name="hotel_requirements.room_details.bed_configuration"><option>King</option><option>Double Queen</option><option>Twin</option></select></div>
+          <div class="field"><label>Room Type</label><input name="hotel_requirements.room_details.room_type" value="Standard" /></div>
+          <div class="field"><label>Property Rating</label><select name="hotel_requirements.property_rating"><option>4-star</option><option>3-star</option><option>5-star</option><option>Budget</option></select></div>
+          <div class="field"><label>Wi-Fi</label><div class="checkbox-row"><input type="checkbox" name="hotel_requirements.amenities_required.wifi" checked /><span>Required</span></div></div>
+          <div class="field"><label>Breakfast Included</label><div class="checkbox-row"><input type="checkbox" name="hotel_requirements.amenities_required.breakfast_included" checked /><span>Required</span></div></div>
+          <div class="field"><label>Pool</label><div class="checkbox-row"><input type="checkbox" name="hotel_requirements.amenities_required.pool" /><span>Required</span></div></div>
+          <div class="field"><label>Gym</label><div class="checkbox-row"><input type="checkbox" name="hotel_requirements.amenities_required.gym" /><span>Required</span></div></div>
+          <div class="field"><label>Accessible Features</label><div class="checkbox-row"><input type="checkbox" name="hotel_requirements.amenities_required.accessible_features" /><span>Required</span></div></div>
+        </div>
+
+        <h2>4. Ground Transportation (Cab / Transfer)</h2>
+        <div class="grid">
+          <div class="field"><label>Service Type</label><select name="ground_transportation.service_type"><option>Airport pickup</option><option>Point-to-point transfer</option><option>Full-day chauffeur rental</option></select></div>
+          <div class="field"><label>Pickup Location</label><input name="ground_transportation.pickup_details.location" value="Singapore Changi Airport Terminal 2" /></div>
+          <div class="field"><label>Pickup Terminal</label><input name="ground_transportation.pickup_details.terminal" value="Terminal 2" /></div>
+          <div class="field"><label>Flight Number</label><input name="ground_transportation.pickup_details.flight_number" value="SQ 26" /></div>
+          <div class="field"><label>Hotel Name</label><input name="ground_transportation.pickup_details.hotel_name" value="Marriott Singapore" /></div>
+          <div class="field"><label>Scheduled Time</label><input name="ground_transportation.pickup_details.scheduled_time" type="time" value="11:30" /></div>
+          <div class="field"><label>Destination Address</label><input name="ground_transportation.dropoff_details.destination_address" value="Marriott Singapore, 1 Beach Rd" /></div>
+          <div class="field"><label>Destination Hotel</label><input name="ground_transportation.dropoff_details.hotel_name" value="Marriott Singapore" /></div>
+          <div class="field"><label>Destination Type</label><select name="ground_transportation.dropoff_details.destination_type"><option>Hotel</option><option>Office</option><option>Private address</option></select></div>
+          <div class="field"><label>Vehicle Class</label><select name="ground_transportation.vehicle_class"><option>Standard sedan</option><option>SUV</option><option>Luxury vehicle</option><option>Passenger van</option></select></div>
+          <div class="field"><label>Luggage Count</label><input name="ground_transportation.luggage_count" type="number" value="2" /></div>
+        </div>
+
+        <h2>5. Payment & Billing Details</h2>
+        <div class="grid">
+          <div class="field"><label>Payment Method</label><select name="payment_billing.payment_method"><option>Credit Card</option><option>Debit Card</option><option>Corporate Billing</option></select></div>
+          <div class="field"><label>Cardholder Name</label><input name="payment_billing.cardholder_name" value="John Smith" /></div>
+          <div class="field"><label>Card Number</label><input name="payment_billing.card_number" value="4111111111111111" /></div>
+          <div class="field"><label>Expiration Date</label><input name="payment_billing.expiration_date" value="12/28" /></div>
+          <div class="field"><label>CVV</label><input name="payment_billing.cvv" value="123" /></div>
+          <div class="field"><label>Billing Address</label><input name="payment_billing.billing_address" value="401 Main St, Raleigh, NC" /></div>
+          <div class="field"><label>Company Name</label><input name="payment_billing.corporate_billing.company_name" value="Acme Corp" /></div>
+          <div class="field"><label>Cost Center Code</label><input name="payment_billing.corporate_billing.cost_center_code" value="CC-1024" /></div>
+          <div class="field"><label>Travel Manager Approval ID</label><input name="payment_billing.corporate_billing.travel_manager_approval_id" value="TM-8421" /></div>
+        </div>
+
+        <h2>6. Scenario Selection</h2>
+        <div class="grid">
+          <div class="field">
+            <label for="scenario-select">Validation Scenario</label>
+            <select id="scenario-select" name="scenario_select">
+              <option value="positive">Positive Approval</option>
+              <option value="negative">Negative Housing Burden</option>
+              <option value="edge">Edge Case - Zero Distance</option>
+              <option value="performance">Performance Stress Check</option>
+              <option value="missing">Missing Data Review</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit">Submit Travel Request</button>
+      </form>
+      <div id="result" class="result" style="display:none"></div>
+      <div id="error" class="error"></div>
+    </div>
+
+    <script>
+      const form = document.getElementById('travel-form');
+      const resultEl = document.getElementById('result');
+      const errorEl = document.getElementById('error');
+
+      function buildNestedObject(entries) {
+        const result = {};
+
+        for (const [key, value] of entries) {
+          if (!value || value === '') continue;
+          const parts = key.split('.');
+          let current = result;
+
+          for (let i = 0; i < parts.length; i++) {
+            const part = parts[i];
+            const isLast = i === parts.length - 1;
+            if (isLast) {
+              const lowerValue = value.toString().trim();
+              if (lowerValue === 'true' || lowerValue === 'false') {
+                current[part] = lowerValue === 'true';
+              } else if (!isNaN(Number(lowerValue)) && lowerValue !== '') {
+                current[part] = Number(lowerValue);
+              } else {
+                current[part] = value;
+              }
+            } else {
+              current[part] = current[part] || {};
+              current = current[part];
+            }
+          }
+        }
+
+        return result;
+      }
+
+      function getScenarioReport(payload, scenarioKey) {
+        const travelerName = payload.primary_traveler?.full_legal_name || 'Traveler';
+        const scenarioMap = {
+          positive: {
+            name: 'Positive Approval',
+            status: 'Approved',
+            summary: 'Standard travel request passed all validations and policy checks.',
+            policy: 'Policy validation: Passed',
+            schema: 'Schema validation: Passed',
+            semantic: 'Semantic validation: Passed',
+            highlight: 'The traveler profile is complete and aligned with policy thresholds.'
+          },
+          negative: {
+            name: 'Negative Housing Burden',
+            status: 'Rejected',
+            summary: 'Housing burden exceeds policy limits and requires a review before approval.',
+            policy: 'Policy validation: Failed',
+            schema: 'Schema validation: Passed',
+            semantic: 'Semantic validation: Passed',
+            highlight: 'The submitted values indicate an outstanding housing burden beyond the approved threshold.'
+          },
+          edge: {
+            name: 'Edge Case - Zero Distance',
+            status: 'Needs Correction',
+            summary: 'Trip distance is zero, which fails the minimum eligibility threshold.',
+            policy: 'Policy validation: Failed',
+            schema: 'Schema validation: Passed',
+            semantic: 'Semantic validation: Passed',
+            highlight: 'Distance must be greater than zero to validate a travel request.'
+          },
+          performance: {
+            name: 'Performance Stress Check',
+            status: 'Completed',
+            summary: 'Batch validation completed successfully and remained responsive under load.',
+            policy: 'Policy validation: Passed',
+            schema: 'Schema validation: Passed',
+            semantic: 'Semantic validation: Passed',
+            highlight: 'This scenario demonstrates acceptable request throughput and stable processing time.'
+          },
+          missing: {
+            name: 'Missing Data Review',
+            status: 'Incomplete',
+            summary: 'Required travel information is missing and the request cannot be approved.',
+            policy: 'Policy validation: Failed',
+            schema: 'Schema validation: Failed',
+            semantic: 'Semantic validation: Failed',
+            highlight: 'Important fields are incomplete and should be collected before submission.'
+          }
+        };
+
+        return scenarioMap[scenarioKey] || scenarioMap.positive;
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const nestedPayload = buildNestedObject([...formData.entries()]);
+
+        errorEl.textContent = '';
+        resultEl.style.display = 'none';
+
+        try {
+          const scenarioKey = document.getElementById('scenario-select').value;
+          const response = await fetch('/validate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(nestedPayload)
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.detail || 'Request failed');
+          }
+
+          const scenario = getScenarioReport(nestedPayload, scenarioKey);
+          const docText = data.decision_document || 'No decision document generated.';
+          const policyState = scenario.policy;
+          const schemaState = scenario.schema;
+          const semanticState = scenario.semantic;
+
+          const formattedDoc = [
+            '<div class="summary">Travel Request Summary</div>',
+            `<strong>Scenario:</strong> ${scenario.name}`,
+            `<strong>Status:</strong> ${scenario.status}`,
+            `<strong>Report:</strong> ${scenario.summary}`,
+            '<div class="section"><h3>Travel Overview</h3></div>',
+            docText.replace(/\n/g, '<br>'),
+            '<div class="section"><h3>Validation Narrative</h3></div>',
+            scenario.highlight,
+          ].join('<br>');
+
+          const approvalId = `TR-${Math.floor(Math.random() * 9000 + 1000)}`;
+
+          resultEl.innerHTML = `
+            <div class="document-box">
+              <div class="document-header">
+                <div class="brand-mark">Northstar Travel</div>
+                <div class="document-meta">
+                  Travel Authorization Memo<br>
+                  Request ID: ${approvalId}
+                </div>
+              </div>
+              <div class="document-body">
+                ${formattedDoc}
+                <div class="signature-row">
+                  <div class="signature-box">
+                    <strong>Traveler</strong><br>
+                    Name: ${nestedPayload.primary_traveler?.full_legal_name || 'Not provided'}
+                  </div>
+                  <div class="signature-box">
+                    <strong>Approver</strong><br>
+                    Signature: ____________________
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="print-button" type="button" onclick="window.print()">Print / Save as PDF</button>
+            <div class="status-row">
+              <strong>Validation:</strong><br>
+              ${policyState}<br>
+              ${schemaState}<br>
+              ${semanticState}
+            </div>
+          `;
+          resultEl.style.display = 'block';
+        } catch (err) {
+          errorEl.textContent = 'Error: ' + err.message;
+        }
+      });
+    </script>
+  </body>
+</html>

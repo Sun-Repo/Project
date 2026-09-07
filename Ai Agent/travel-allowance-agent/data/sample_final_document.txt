@@ -1,0 +1,31 @@
+Employee: John Smith
+Age: 42
+Employment Class: B
+
+Travel Profile
+--------------
+Distance: 35 miles
+Frequency: Daily
+Transportation: Car
+
+Financial Profile
+-----------------
+Household Income: $95,000
+Mortgage: $2,400
+Property Tax: $500
+Insurance: $180
+Car Payment: $650
+
+Eligibility
+-----------
+Age Category: Senior Professional
+Base Allowance: $60
+
+Distance Allowance: $20
+Financial Support: $10
+Housing Support: $15
+Transportation Support: $0
+
+Final Allowance: $105/day
+
+This travel allowance is approved under the documented distance, income, and housing support policy.

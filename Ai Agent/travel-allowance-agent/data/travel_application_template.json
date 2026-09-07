@@ -1,0 +1,103 @@
+{
+  "primary_traveler": {
+    "full_legal_name": "",
+    "first_name": "",
+    "middle_name": "",
+    "last_name": "",
+    "date_of_birth": "",
+    "gender": "",
+    "primary_phone": "",
+    "email": "",
+    "home_address": "",
+    "emergency_contact": {
+      "name": "",
+      "relationship": "",
+      "phone": "",
+      "email": ""
+    },
+    "passport": {
+      "number": "",
+      "issuing_country": "",
+      "nationality": "",
+      "issue_date": "",
+      "expiration_date": ""
+    },
+    "loyalty_programs": {
+      "frequent_flyer": "",
+      "hotel_rewards": "",
+      "rental_car_program": ""
+    }
+  },
+  "flight_requirements": {
+    "trip_type": "",
+    "routing": {
+      "departure_city": "",
+      "departure_airport_code": "",
+      "arrival_city": "",
+      "arrival_airport_code": ""
+    },
+    "travel_dates": {
+      "departure_date": "",
+      "return_date": "",
+      "flexible_date_tolerance": ""
+    },
+    "cabin_class": "",
+    "seat_preference": "",
+    "meal_preference": "",
+    "baggage": {
+      "checked_bags": 0,
+      "carry_on_count": 0,
+      "special_items": ""
+    }
+  },
+  "hotel_requirements": {
+    "check_in_date": "",
+    "check_out_date": "",
+    "location_preference": "",
+    "hotel_name_or_chain": "",
+    "room_details": {
+      "number_of_guests": 0,
+      "room_count": 0,
+      "bed_configuration": "",
+      "room_type": ""
+    },
+    "property_rating": "",
+    "amenities_required": {
+      "wifi": false,
+      "breakfast_included": false,
+      "pool": false,
+      "gym": false,
+      "accessible_features": false
+    }
+  },
+  "ground_transportation": {
+    "service_type": "",
+    "pickup_details": {
+      "location": "",
+      "terminal": "",
+      "flight_number": "",
+      "hotel_name": "",
+      "scheduled_time": ""
+    },
+    "dropoff_details": {
+      "destination_address": "",
+      "hotel_name": "",
+      "destination_type": ""
+    },
+    "vehicle_class": "",
+    "luggage_count": 0
+  },
+  "payment_billing": {
+    "payment_method": "",
+    "cardholder_name": "",
+    "card_number": "",
+    "expiration_date": "",
+    "cvv": "",
+    "billing_address": "",
+    "corporate_billing": {
+      "company_name": "",
+      "cost_center_code": "",
+      "travel_manager_approval_id": ""
+    }
+  }
+}
